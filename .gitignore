@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.jest-localstorage.json
+.env
+*.log
+.DS_Store
+
+# Local database state
+postgres-data/
