@@ -8,6 +8,48 @@ Backend para gestionar productos, stock, usuarios y permisos. El proyecto se con
 - npm
 - Docker Desktop (a partir del módulo de PostgreSQL)
 
+## Módulo 2: PostgreSQL con Docker
+
+El entorno local de PostgreSQL se define en `docker/docker-compose.yml`.
+
+Configura las variables locales copiando `.env.example` a `.env`:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Inicia la base de datos:
+
+```bash
+npm run db:up
+```
+
+Comprueba que el contenedor esté saludable:
+
+```bash
+docker compose -f docker/docker-compose.yml ps
+```
+
+La conexión por defecto es:
+
+```text
+postgresql://inventory_user:inventory_password@localhost:5432/inventory_db
+```
+
+Para detener PostgreSQL sin eliminar los datos:
+
+```bash
+npm run db:down
+```
+
+Para borrar también el volumen local, únicamente en desarrollo:
+
+```bash
+docker compose -f docker/docker-compose.yml down -v
+```
+
+Consulta la [guía de PostgreSQL](docker/README.md) para los comandos y advertencias del volumen.
+
 ## Módulo 0: ejecutar la API
 
 Instala las dependencias:
@@ -70,6 +112,9 @@ Respuesta:
 | `npm test` | Ejecuta las pruebas |
 | `npm run test:watch` | Ejecuta pruebas en modo watch |
 | `npm run test:coverage` | Genera el informe de cobertura |
+| `npm run db:up` | Inicia PostgreSQL con Docker Compose |
+| `npm run db:down` | Detiene PostgreSQL y conserva el volumen |
+| `npm run db:logs` | Muestra los logs de PostgreSQL |
 
 ## Arquitectura inicial
 
@@ -107,4 +152,6 @@ El Módulo 0 incluye la aplicación Express, middleware base, configuración Typ
 
 El Módulo 1 añade el router `/api/v1`, la respuesta de estado, el formato común de errores, el middleware de rutas inexistentes y la estructura base para controllers, services, repositories, schemas, configuración y tipos.
 
-Los módulos siguientes añadirán PostgreSQL, Prisma, inventario, autenticación JWT, roles, Swagger y pruebas de integración.
+El Módulo 2 añade PostgreSQL 16 sobre Docker Compose, volumen persistente, healthcheck, variables de entorno y scripts para iniciar, detener y consultar la base de datos.
+
+Los módulos siguientes añadirán Prisma, el dominio de inventario, autenticación JWT, roles, Swagger y pruebas de integración.

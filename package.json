@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "test": "node --localstorage-file=.jest-localstorage.json ./node_modules/jest/bin/jest.js --runInBand",
     "test:watch": "node --localstorage-file=.jest-localstorage.json ./node_modules/jest/bin/jest.js --watch",
-    "test:coverage": "node --localstorage-file=.jest-localstorage.json ./node_modules/jest/bin/jest.js --coverage"
+    "test:coverage": "node --localstorage-file=.jest-localstorage.json ./node_modules/jest/bin/jest.js --coverage",
+    "db:up": "docker compose -f docker/docker-compose.yml up -d",
+    "db:down": "docker compose -f docker/docker-compose.yml down",
+    "db:logs": "docker compose -f docker/docker-compose.yml logs -f postgres"
   },
   "keywords": [],
   "author": "",
