@@ -187,4 +187,67 @@ El Módulo 1 añade el router `/api/v1`, la respuesta de estado, el formato com�
 
 El Módulo 2 añade PostgreSQL 16 sobre Docker Compose, volumen persistente, healthcheck, variables de entorno y scripts para iniciar, detener y consultar la base de datos.
 
-Los módulos siguientes añadirán Prisma, el dominio de inventario, autenticación JWT, roles, Swagger y pruebas de integración.
+El desarrollo progresivo ha avanzado hasta el Módulo 4.
+
+### Módulo 3: estado
+
+El Módulo 3 (Prisma y datos iniciales) está completado: el esquema de datos vive en `prisma/schema.prisma`, las migraciones iniciales se aplicaron y el seed reproducible crea datos de ejemplo (usuario admin, categoría `General`, producto `SKU-001`).
+
+### Módulo 4: CRUD de categorías y productos (completado)
+
+Implementaciones realizadas:
+
+- Endpoints de categorías y productos con validación básica y manejo de errores.
+- CRUD completo para `categories` y `products` con control de duplicados y 404s.
+- Validaciones de payloads en `src/schemas`.
+- Repositorios Prisma en `src/repositories`.
+- Pruebas de integración básicas en `tests/categories.test.ts` y `tests/products.test.ts`.
+- TypeScript compila sin errores (`npm run typecheck`).
+
+Rutas disponibles (base `http://localhost:3000/api/v1`):
+
+```
+GET    /categories
+GET    /categories/:id
+POST   /categories
+PATCH  /categories/:id
+DELETE /categories/:id
+
+GET    /products
+GET    /products/:id
+POST   /products
+PATCH  /products/:id
+DELETE /products/:id
+```
+
+Ejemplo rápido para Postman (crear categoría):
+
+POST http://localhost:3000/api/v1/categories
+
+Body (JSON):
+
+```json
+{
+	"name": "Nueva categoría"
+}
+```
+
+Ejecutar todo localmente (secuencialmente):
+
+```bash
+npm install
+copy .env.example .env
+npm run db:up          # inicia PostgreSQL en Docker
+npm run prisma:generate
+npm run prisma:migrate
+npm run db:seed
+npm run dev            # o npm start después de build
+```
+
+Ejecutar pruebas:
+
+```bash
+npm test
+```
+
+Próximos pasos planificados: autenticación JWT, autorización por roles, movimientos de stock y documentación OpenAPI/Swagger.
