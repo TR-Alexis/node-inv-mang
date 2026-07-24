@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { ApiDataResponse } from '../types/api';
 import categoriesRouter from './categories';
+import productsRouter from './products';
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.get('/', (_request, response) => {
 });
 
 router.use('/categories', categoriesRouter);
+router.use('/products', productsRouter);
 
 export default router;
