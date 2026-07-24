@@ -50,6 +50,36 @@ docker compose -f docker/docker-compose.yml down -v
 
 Consulta la [guía de PostgreSQL](docker/README.md) para los comandos y advertencias del volumen.
 
+## Módulo 3: Prisma y datos iniciales
+
+El modelo de datos se define en `prisma/schema.prisma` y se sincroniza con PostgreSQL usando Prisma Migrate.
+
+Para generar el cliente Prisma:
+
+```bash
+npm run prisma:generate
+```
+
+Para aplicar la migración inicial:
+
+```bash
+npm run prisma:migrate
+```
+
+Para poblar datos de desarrollo con seed:
+
+```bash
+npm run db:seed
+```
+
+La semilla crea:
+
+- Usuario administrador `admin@example.com`.
+- Categoría `General`.
+- Producto `SKU-001` en `General`.
+
+La API ya puede leer y escribir datos con Prisma; por ejemplo `GET /api/v1/categories` y `POST /api/v1/categories`.
+
 ## Módulo 0: ejecutar la API
 
 Instala las dependencias:
@@ -115,6 +145,9 @@ Respuesta:
 | `npm run db:up` | Inicia PostgreSQL con Docker Compose |
 | `npm run db:down` | Detiene PostgreSQL y conserva el volumen |
 | `npm run db:logs` | Muestra los logs de PostgreSQL |
+| `npm run prisma:generate` | Genera el cliente Prisma |
+| `npm run prisma:migrate` | Aplica la migración inicial |
+| `npm run db:seed` | Ejecuta el seed de Prisma |
 
 ## Arquitectura inicial
 
