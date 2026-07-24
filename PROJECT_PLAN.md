@@ -40,6 +40,10 @@ Los Módulos 0, 1 y 2 están completados. La API ya incluye:
 - Volumen persistente para desarrollo local.
 - Healthcheck de PostgreSQL.
 - Variables de conexión y scripts `db:up`, `db:down` y `db:logs`.
+- Modelo Prisma definido en `prisma/schema.prisma`.
+- Cliente Prisma singleton en `src/lib/prisma.ts`.
+- Migración inicial aplicada.
+- Seed reproducible con usuario admin, categoría y producto.
 
 La respuesta inicial de la API es:
 
@@ -171,6 +175,8 @@ inventory-management/
 - Migración inicial.
 - Cliente Prisma singleton.
 - Seed reproducible.
+- Endpoint `GET /api/v1/categories`.
+- Endpoint `POST /api/v1/categories`.
 
 **Criterios de terminado:**
 
@@ -178,6 +184,9 @@ inventory-management/
 - El seed crea datos de desarrollo.
 - Las restricciones de la base de datos evitan datos inválidos.
 - La API puede leer y escribir mediante Prisma.
+- Las rutas de categorías funcionan con datos reales.
+
+**Estado:** completado.
 
 ### Módulo 4: CRUD de categorías y productos
 

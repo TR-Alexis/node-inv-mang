@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { ApiDataResponse } from '../types/api';
+import categoriesRouter from './categories';
 
 const router = Router();
 
@@ -19,5 +20,7 @@ router.get('/', (_request, response) => {
 
   response.json(payload);
 });
+
+router.use('/categories', categoriesRouter);
 
 export default router;
