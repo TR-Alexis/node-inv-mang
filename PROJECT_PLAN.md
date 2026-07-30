@@ -229,7 +229,7 @@ DELETE /api/v1/categories/:id
 
 **Objetivo:** mantener existencias consistentes y auditables.
 
-**Endpoints previstos:**
+**Endpoints implementados:**
 
 ```text
 POST /api/v1/products/:id/movements
@@ -257,6 +257,8 @@ GET  /api/v1/products/:id/movements
 - El stock insuficiente produce un error controlado.
 - El stock y el historial permanecen sincronizados.
 - Existe una prueba de rollback.
+
+**Estado:** completado.
 
 ### Módulo 6: Autenticación con JWT
 

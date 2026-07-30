@@ -250,4 +250,41 @@ Ejecutar pruebas:
 npm test
 ```
 
-Próximos pasos planificados: autenticación JWT, autorización por roles, movimientos de stock y documentación OpenAPI/Swagger.
+### Módulo 5: movimientos de stock (completado)
+
+Se añadió el soporte para registrar movimientos de inventario y actualizar la cantidad de cada producto en una transacción.
+
+Endpoints disponibles:
+
+```
+POST /api/v1/products/:id/movements
+GET  /api/v1/products/:id/movements
+```
+
+Ejemplo para crear un movimiento de entrada:
+
+```http
+POST http://localhost:3000/api/v1/products/:id/movements
+Content-Type: application/json
+
+{
+  "type": "IN",
+  "quantity": 4,
+  "note": "Reposición inicial"
+}
+```
+
+Reglas implementadas:
+
+- `IN` incrementa el stock.
+- `OUT` decrementa el stock y falla con `400` si no hay cantidad suficiente.
+- `ADJUSTMENT` reemplaza la cantidad del producto por el valor enviado.
+- Los movimientos se guardan en el historial con su tipo, cantidad, nota y fecha.
+
+Pruebas verificadas:
+
+```bash
+npm test -- --runInBand tests/movements.test.ts
+```
+
+Próximos pasos planificados: autenticación JWT, autorización por roles y documentación OpenAPI/Swagger.
