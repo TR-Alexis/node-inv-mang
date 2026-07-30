@@ -260,6 +260,35 @@ GET  /api/v1/products/:id/movements
 
 **Estado:** completado.
 
+### Módulo 6: autenticación JWT y roles
+
+**Objetivo:** proteger la API con autenticación basada en tokens y autorización por roles.
+
+**Endpoints implementados:**
+
+```text
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET  /api/v1/admin
+```
+
+**Funcionalidades:**
+
+- Registro y login de usuarios.
+- Hash de contraseñas con `bcryptjs`.
+- Emisión yvalidación de JWT.
+- Middleware de autenticación.
+- Middleware de roles para rutas protegidas.
+
+**Criterios de terminado:**
+
+- Los usuarios pueden registrarse e iniciar sesión.
+- El acceso a rutas protegidas requiere un token válido.
+- Un usuario sin rol `ADMIN` recibe `403` en rutas restringidas.
+- Existe una prueba de integración para login y acceso no autorizado.
+
+**Estado:** completado.
+
 ### Módulo 6: Autenticación con JWT
 
 **Objetivo:** identificar usuarios y proteger los endpoints.

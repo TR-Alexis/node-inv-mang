@@ -287,4 +287,61 @@ Pruebas verificadas:
 npm test -- --runInBand tests/movements.test.ts
 ```
 
-Próximos pasos planificados: autenticación JWT, autorización por roles y documentación OpenAPI/Swagger.
+### Módulo 6: autenticación JWT y roles (completado)
+
+Se añadió una capa básica de autenticación con JWT y control de acceso por roles.
+
+Endpoints disponibles:
+
+```
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET  /api/v1/admin
+```
+
+Ejemplo para registrar un usuario:
+
+```http
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "secret123",
+  "name": "Admin User"
+}
+```
+
+Ejemplo para iniciar sesión:
+
+```http
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "secret123"
+}
+```
+
+Uso del token:
+
+```http
+GET http://localhost:3000/api/v1/admin
+Authorization: Bearer <token>
+```
+
+Reglas implementadas:
+
+- Registro y login con hash de contraseña usando `bcryptjs`.
+- Emisión de JWT con expiración de 8 horas.
+- Middleware de autenticación para proteger rutas.
+- Middleware de rol para permitir acceso únicamente a `ADMIN`.
+
+Pruebas verificadas:
+
+```bash
+npm test -- --runInBand tests/auth.test.ts
+```
+
+Próximos pasos planificados: Swagger/OpenAPI y mejoras de seguridad como refresh tokens y permisos más granulares.
